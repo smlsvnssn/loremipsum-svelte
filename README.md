@@ -10,6 +10,7 @@ npm install loerem
 import lörem from "loerem";
 console.log(lörem());
 ```
+https://loremipsum-svelte.vercel.app/
 
 Comes with a multitude of options:
 
@@ -48,5 +49,3 @@ Takes a `settings` object wih these properties (all optional):
 	alwaysWrapParagraph = false
 }
 ```
-
-Demo (in Swedish) here: https://lhli.net/stuff/l%C3%B6remIpsum/

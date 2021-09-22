@@ -36,6 +36,7 @@
 						{ö.random(1, 32)}/{ö.random(1, 13)}
 						{ö.random(1960, 2020)}
 					</time>
+					<!-- svelte-ignore a11y-invalid-attribute -->
 					<a href="#" class="text">
 						{löremIpsum({
 							numberOfParagraphs: 1,

@@ -1,25 +1,24 @@
 <script>
 	import löremIpsum from 'loerem';
-	import { params } from './params';
 	import PresetContent from './parts/PresetContent.svelte';
 
-	export let update;
+	export let doRerun;
+	export let settings;
+	export let contentElement;
+	export let renderFormInput;
 
-	let el;
-
-	// referenced by 'copy' button
-	$: $params.contentElement = el;
-
-	// Somewhat clean but weird hack to force rerender on update
+	// Somewhat clean but weird hack to force rerender on update.
+	// Await null promise to react to value change (if statement doesn't work)
 	const forceUpdate = async (_) => null;
 </script>
 
-<div bind:this={el} id="wrapper" lang="sv" contentEditable="true" spellcheck="false">
-	{#if !$params.renderFormInput}
-		{#await forceUpdate(update) then _}
+<div bind:this={contentElement} id="wrapper" lang="sv" contentEditable="true" spellcheck="false">
+	<!-- Part II of weird hack -->
+	{#await forceUpdate(doRerun) then _}
+		{#if !renderFormInput}
 			<PresetContent />
-		{/await}
-	{:else}
-		{@html löremIpsum(Object.assign({}, $params.settings, $params.formatted))}
-	{/if}
+		{:else}
+			{@html löremIpsum(settings)}
+		{/if}
+	{/await}
 </div>

@@ -1,32 +1,59 @@
 <script>
-	import Infobox from './parts/Infobox.svelte';
 	import Controls from './Controls.svelte';
 	import Content from './Content.svelte';
 	import FunctionCall from './parts/FunctionCall.svelte';
 	import Icon from './parts/Icon.svelte';
+	import Infobox from './parts/Infobox.svelte';
 	import { clickOutside, copyText, setCssColours } from './actions';
-	import { params } from './params';
 
-	let updateLayout = 1;
+	let showSettings = false,
+		contentElement,
+		showInfobox = false,
+		renderFormInput = false,
+		rawSettings = {
+			numberOfParagraphs: 5,
+			sentencesPerParagraph: 5,
+			maxSentenceLength: 5,
+			minSentenceLength: 1,
+			nyordFrequency: 10,
+			neologismerFrequency: 5,
+			namnFrequency: 0,
+			buzzFrequency: 0,
+			punchline: 'Du kan vara drabbad.',
+			isHeadline: false,
+			isName: false,
+			useLörem: true,
+			wrapInDiv: false,
+			alwaysWrapParagraph: true,
+		},
+		formattedSettings = {},
+		doRerun = 1;
 
-	$: setCssColours(updateLayout);
+	const rerun = () => doRerun++,
+		cogs = () => (showSettings = !showSettings),
+		copy = () => copyText(contentElement),
+		info = () => (showInfobox = true);
+
+	$: setCssColours(doRerun);
+	$: settings = Object.assign({}, rawSettings, formattedSettings);
 </script>
 
 <main>
-	<Content update={updateLayout} />
 	<nav
-		class="settings {$params.showSettings ? '' : 'hidden'}"
+		class="settings {showSettings ? '' : 'hidden'}"
 		use:clickOutside={() => {
-			if ($params.showSettings) $params.showSettings = false;
+			if (showSettings) showSettings = false;
 		}}>
-		<Controls />
-		<FunctionCall />
+		<Controls bind:rawSettings bind:formattedSettings bind:renderFormInput />
+		<FunctionCall {settings} />
 	</nav>
 
-	<Icon type="rerun" on:click={() => updateLayout++} />
-	<Icon type="cogs" on:click={() => ($params.showSettings = !$params.showSettings)} />
-	<Icon type="copy" on:click={() => copyText($params.contentElement)} />
-	<Icon type="info" on:click={() => ($params.showInfobox = true)} />
+	<Content {doRerun} {settings} {renderFormInput} bind:contentElement />
 
-	<Infobox />
+	<Icon type="rerun" on:click={rerun} />
+	<Icon type="cogs" on:click={cogs} />
+	<Icon type="copy" on:click={copy} />
+	<Icon type="info" on:click={info} />
+
+	<Infobox bind:showInfobox />
 </main>

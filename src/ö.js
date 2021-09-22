@@ -235,7 +235,7 @@ export const toCamelCase = s => s.match(/^\-\-/) ? s // is css var, so leave it 
 export const toKebabCase = s => s.match(/^\-\-/) ? s // is css var, so leave it alone
 	: s.replace(/\s/g, '-').replace(/([a-z0-9])([A-Z0-9])/g, '$1-$2').toLowerCase();
 	
-export const randomChars = (Math.random()*2**64).toString(36).substring(0,10);
+export const randomChars = () => (Math.random()*2**64).toString(36).substring(0,10);
 
 // Colours
 export const toHsla = (c, asString = false) => {

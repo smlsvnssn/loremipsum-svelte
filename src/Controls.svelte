@@ -3,57 +3,53 @@
 	import Switch from './parts/Switch.svelte';
 
 	export let rawSettings;
-	export let formattedSettings;
-	export let renderFormInput;
+	export let settings;
 
-	// cap min sentence length
-	$: rawSettings.minSentenceLength = Math.min(rawSettings.minSentenceLength, rawSettings.maxSentenceLength);
-
-	// if useHeadline, set paragraph length to 1 and vice verca
 	$: {
-		if (rawSettings.isHeadline) rawSettings.sentencesPerParagraph = 1;
+		// cap min sentence length
+		settings.minSentenceLength = Math.min(settings.minSentenceLength, settings.maxSentenceLength);
 
-		if (rawSettings.sentencesPerParagraph > 1) rawSettings.isHeadline = false;
-	}
+		// if useHeadline, set paragraph length to 1 and vice verca
+		if (settings.isHeadline) settings.sentencesPerParagraph = 1;
+		if (settings.sentencesPerParagraph > 1) settings.isHeadline = false;
 
-	// Format for output
-	$: {
-		formattedSettings.nyordFrequency = rawSettings.nyordFrequency / 100;
-		formattedSettings.neologismerFrequency = rawSettings.neologismerFrequency / 100;
-		formattedSettings.namnFrequency = rawSettings.namnFrequency / 100;
-		formattedSettings.buzzFrequency = rawSettings.buzzFrequency / 100;
-		formattedSettings.paragraphStartWrap = rawSettings.isHeadline ? '<h2>' : '<p>';
-		formattedSettings.paragraphEndWrap = rawSettings.isHeadline ? '</h2>' : '</p>';
+		// Format for output
+		settings.nyordFrequency = rawSettings.nyordFrequency / 100;
+		settings.neologismerFrequency = rawSettings.neologismerFrequency / 100;
+		settings.namnFrequency = rawSettings.namnFrequency / 100;
+		settings.buzzFrequency = rawSettings.buzzFrequency / 100;
+		settings.paragraphStartWrap = settings.isHeadline ? '<h2>' : '<p>';
+		settings.paragraphEndWrap = settings.isHeadline ? '</h2>' : '</p>';
 	}
 </script>
 
 <form
 	on:input={() => {
-		if (!renderFormInput) renderFormInput = true;
+		if (!settings.renderFormInput) settings.renderFormInput = true;
 	}}>
 	<div>
-		<Switch label="Preset" label2="My settings" bind:value={renderFormInput} />
+		<Switch label="Preset" label2="My settings" bind:value={settings.renderFormInput} />
 	</div>
 	<div id="sliders" class="fieldset">
-		<Slider title="Number of paragraphs" bind:value={rawSettings.numberOfParagraphs} min="1" max="20" />
-		<Slider title="Sentences per paragraph" bind:value={rawSettings.sentencesPerParagraph} min="1" max="20" />
-		<Slider title="Max sentence length" bind:value={rawSettings.maxSentenceLength} min="1" max="20" />
-		<Slider title="Minimum sentence length" bind:value={rawSettings.minSentenceLength} min="1" max={rawSettings.maxSentenceLength} />
+		<Slider title="Number of paragraphs" bind:value={settings.numberOfParagraphs} min="1" max="20" />
+		<Slider title="Sentences per paragraph" bind:value={settings.sentencesPerParagraph} min="1" max="20" />
+		<Slider title="Max sentence length" bind:value={settings.maxSentenceLength} min="1" max="20" />
+		<Slider title="Minimum sentence length" bind:value={settings.minSentenceLength} min="1" max={settings.maxSentenceLength} />
 		<Slider title="New swedish words (%)" bind:value={rawSettings.nyordFrequency} min="0" max="100" />
 		<Slider title="Faux academic neologisms (%)" bind:value={rawSettings.neologismerFrequency} min="0" max="100" />
 		<Slider title="Names (%)" bind:value={rawSettings.namnFrequency} min="0" max="100" />
 		<Slider title="Buzz (%)" bind:value={rawSettings.buzzFrequency} min="0" max="100" />
 		<div>
 			<legend>Punchline</legend>
-			<input type="text" bind:value={rawSettings.punchline} />
+			<input type="text" bind:value={settings.punchline} />
 		</div>
 	</div>
 
 	<div id="switchar" class="fieldset">
-		<Switch label="Is headline" bind:value={rawSettings.isHeadline} />
-		<Switch label="Is name" bind:value={rawSettings.isName} />
-		<Switch label={'Begin with "Lörem ipsum"'} bind:value={rawSettings.useLörem} />
-		<Switch label="Wrap in <div>" bind:value={rawSettings.wrapInDiv} />
-		<Switch label="Always wrap paragraph" bind:value={rawSettings.alwaysWrapParagraph} />
+		<Switch label="Is headline" bind:value={settings.isHeadline} />
+		<Switch label="Is name" bind:value={settings.isName} />
+		<Switch label={'Begin with "Lörem ipsum"'} bind:value={settings.useLörem} />
+		<Switch label="Wrap in <div>" bind:value={settings.wrapInDiv} />
+		<Switch label="Always wrap paragraph" bind:value={settings.alwaysWrapParagraph} />
 	</div>
 </form>

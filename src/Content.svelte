@@ -1,21 +1,27 @@
 <script>
 	import löremIpsum from 'loerem';
 	import PresetContent from './parts/PresetContent.svelte';
+	import { copyText, setCssColours } from './actions';
 
-	export let doRerun;
-	export let settings;
-	export let contentElement;
-	export let renderFormInput;
+	let contentWrapper,
+		doRerun = 1;
 
 	// Somewhat clean but weird hack to force rerender on update.
 	// Await null promise to react to value change (if statement doesn't work)
-	const forceUpdate = async (_) => null;
+	const forceUpdate = async (_) => {};
+
+	export let settings;
+
+	export const copy = () => copyText(contentWrapper),
+		rerun = () => doRerun++;
+
+	$: setCssColours(doRerun);
 </script>
 
-<div bind:this={contentElement} id="wrapper" lang="sv" contentEditable="true" spellcheck="false">
+<div bind:this={contentWrapper} id="wrapper" lang="sv" contentEditable="true" spellcheck="false">
 	<!-- Part II of weird hack -->
 	{#await forceUpdate(doRerun) then _}
-		{#if !renderFormInput}
+		{#if !settings.renderFormInput}
 			<PresetContent />
 		{:else}
 			{@html löremIpsum(settings)}

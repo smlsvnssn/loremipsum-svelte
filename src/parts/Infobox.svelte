@@ -1,8 +1,10 @@
 <script>
 	export let showInfobox;
+
+	const hideInfo = () => (showInfobox = false);
 </script>
 
-<div id="infobox" class={showInfobox ? '' : 'hidden'} on:click={() => (showInfobox = false)}>
+<div id="infobox" class={showInfobox ? '' : 'hidden'} on:click={hideInfo}>
 	<div>
 		<h3>Lörem ipsum? Lörem ipsum!</h3>
 		<p>Generated faux Swedish for the masses. Has all the options.</p>

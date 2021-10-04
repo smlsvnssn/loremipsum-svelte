@@ -4,56 +4,61 @@
 	import FunctionCall from './parts/FunctionCall.svelte';
 	import Icon from './parts/Icon.svelte';
 	import Infobox from './parts/Infobox.svelte';
-	import { clickOutside, copyText, setCssColours } from './actions';
+	import { clickOutside } from './actions';
 
 	let showSettings = false,
-		contentElement,
 		showInfobox = false,
-		renderFormInput = false,
 		rawSettings = {
-			numberOfParagraphs: 5,
-			sentencesPerParagraph: 5,
-			maxSentenceLength: 5,
-			minSentenceLength: 1,
+			// gets converted from percent by Controls
 			nyordFrequency: 10,
 			neologismerFrequency: 5,
 			namnFrequency: 0,
 			buzzFrequency: 0,
+		},
+		settings = {
+			numberOfParagraphs: 5,
+			sentencesPerParagraph: 5,
+			maxSentenceLength: 5,
+			minSentenceLength: 1,
 			punchline: 'Du kan vara drabbad.',
 			isHeadline: false,
 			isName: false,
 			useLörem: true,
 			wrapInDiv: false,
 			alwaysWrapParagraph: true,
+			renderFormInput: false,
 		},
-		formattedSettings = {},
-		doRerun = 1;
+		content;
 
-	const rerun = () => doRerun++,
-		cogs = () => (showSettings = !showSettings),
-		copy = () => copyText(contentElement),
-		info = () => (showInfobox = true);
+	if (localStorage.getItem('settings')) {
+		settings = JSON.parse(localStorage.getItem('settings'));
+		rawSettings = JSON.parse(localStorage.getItem('rawSettings'));
+	}
 
-	$: setCssColours(doRerun);
-	$: settings = Object.assign({}, rawSettings, formattedSettings);
+	$: {
+		localStorage.setItem('settings', JSON.stringify(settings));
+		localStorage.setItem('rawSettings', JSON.stringify(rawSettings));
+	}
+
+	const toggleSettings = () => (showSettings = !showSettings),
+		hideSettings = () => {
+			if (showSettings) showSettings = false;
+		},
+		showInfo = () => (showInfobox = true);
 </script>
 
 <main>
-	<nav
-		class="settings {showSettings ? '' : 'hidden'}"
-		use:clickOutside={() => {
-			if (showSettings) showSettings = false;
-		}}>
-		<Controls bind:rawSettings bind:formattedSettings bind:renderFormInput />
+	<nav class="settings {showSettings ? '' : 'hidden'}" use:clickOutside={hideSettings}>
+		<Controls bind:settings bind:rawSettings />
 		<FunctionCall {settings} />
 	</nav>
 
-	<Content {doRerun} {settings} {renderFormInput} bind:contentElement />
+	<Content bind:this={content} {settings} />
 
-	<Icon type="rerun" on:click={rerun} />
-	<Icon type="cogs" on:click={cogs} />
-	<Icon type="copy" on:click={copy} />
-	<Icon type="info" on:click={info} />
+	<Icon type="cogs" on:click={toggleSettings} />
+	<Icon type="info" on:click={showInfo} />
+	<Icon type="rerun" on:click={content.rerun} />
+	<Icon type="copy" on:click={content.copy} />
 
 	<Infobox bind:showInfobox />
 </main>

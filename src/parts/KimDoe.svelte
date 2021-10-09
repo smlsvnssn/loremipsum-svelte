@@ -1,10 +1,10 @@
 <script>
-	import * as ö from '../ö';
 	import löremIpsum from 'loerem';
+	import { random, load } from 'ouml';
 
 	const randUser = async () => {
-		let url = `https://randomuser.me/api/?nat=dk,no?nocache=${ö.random(1, true)}`,
-			r = await ö.load(url);
+		let url = `https://randomuser.me/api/?nat=dk,no?nocache=${random(1, true)}`,
+			r = await load(url);
 		return r.results[0];
 	};
 </script>
@@ -33,8 +33,8 @@
 					})}
 					<br />
 					<time class="text">
-						{ö.random(1, 32)}/{ö.random(1, 13)}
-						{ö.random(1960, 2020)}
+						{random(1, 32)}/{random(1, 13)}
+						{random(1960, 2020)}
 					</time>
 					<!-- svelte-ignore a11y-invalid-attribute -->
 					<a href="#" class="text">

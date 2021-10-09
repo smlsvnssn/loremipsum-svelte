@@ -2,12 +2,12 @@
 	import KimDoe from './KimDoe.svelte';
 	import löremIpsum from 'loerem';
 	import { blur } from 'svelte/transition';
-	import * as ö from '../ö';
+	import {random,wrapFirstWords} from 'ouml';
 </script>
 
 <div in:blur>
 	<p class="dårrad">
-		§ {ö.random(1, 100) + '.' + ö.random(1, 10)}
+		§ {random(1, 100) + '.' + random(1, 10)}
 		<span>
 			{@html löremIpsum({
 				numberOfParagraphs: 1,
@@ -37,9 +37,9 @@
 
 	<KimDoe />
 
-	{@html ö.wrapFirstWords(
+	{@html wrapFirstWords(
 		löremIpsum({
-			numberOfParagraphs: ö.random(1, 4),
+			numberOfParagraphs: random(1, 4),
 			sentencesPerParagraph: 6,
 			maxSentenceLength: 10,
 			alwaysWrapParagraph: true,
@@ -59,9 +59,9 @@
 		})}
 	</blockquote>
 
-	{@html ö.wrapFirstWords(
+	{@html wrapFirstWords(
 		löremIpsum({
-			numberOfParagraphs: ö.random(1, 4),
+			numberOfParagraphs: random(1, 4),
 			sentencesPerParagraph: 6,
 			maxSentenceLength: 10,
 			alwaysWrapParagraph: true,
@@ -83,12 +83,12 @@
 	</h2>
 
 	<figure class="img">
-		<img alt="Who knows" src="https://picsum.photos/200/200?nocache=${ö.random(1, true)}" />
+		<img alt="Who knows" src="https://picsum.photos/200/200?nocache=${random(1, true)}" />
 	</figure>
 
-	{@html ö.wrapFirstWords(
+	{@html wrapFirstWords(
 		löremIpsum({
-			numberOfParagraphs: ö.random(1, 4),
+			numberOfParagraphs: random(1, 4),
 			sentencesPerParagraph: 6,
 			maxSentenceLength: 10,
 			alwaysWrapParagraph: true,
@@ -109,9 +109,9 @@
 		})}
 	</h3>
 
-	{@html ö.wrapFirstWords(
+	{@html wrapFirstWords(
 		löremIpsum({
-			numberOfParagraphs: ö.random(1, 4),
+			numberOfParagraphs: random(1, 4),
 			sentencesPerParagraph: 6,
 			maxSentenceLength: 10,
 			alwaysWrapParagraph: true,
@@ -132,9 +132,9 @@
 		})}
 	</h3>
 
-	{@html ö.wrapFirstWords(
+	{@html wrapFirstWords(
 		löremIpsum({
-			numberOfParagraphs: ö.random(1, 4),
+			numberOfParagraphs: random(1, 4),
 			sentencesPerParagraph: 6,
 			maxSentenceLength: 10,
 			alwaysWrapParagraph: true,

@@ -1,9 +1,9 @@
 <script>
-	import * as ö from '../ö';
+	import {randomChars} from 'ouml';
 	export let label = 'Title';
 	export let label2 = null;
 	export let value = 0;
-	let id = 'id-' + ö.randomChars();
+	let id = 'id-' + randomChars();
 </script>
 
 <div>

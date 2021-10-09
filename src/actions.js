@@ -1,5 +1,4 @@
-import * as ö from './ö';
-
+import { random, hsla } from 'ouml';
 /*
 generic
 */
@@ -18,7 +17,6 @@ export const clickOutside = (node, cb) => {
 }
 
 export const copyText = node => {
-	ö.log(node)
 	const range = document.createRange(),
 		selection = window.getSelection();
 
@@ -33,19 +31,19 @@ specific
 */
 
 export const setCssColours = () => {
-	const hue = ö.random(360),
+	const hue = random(360),
 		[light, dark] = [
 			[85, hue, "multiply"],
 			[10, hue + 180, "screen"],
 		],
-		[a, b] = ö.random(2) > 0 ? [light, dark] : [dark, light],
+		[a, b] = random(2) > 0 ? [light, dark] : [dark, light],
 		props = {
-			"--bg": ö.hsla(a[1], 50, a[0]),
-			"--clr": ö.hsla(b[1], 50, b[0]),
-			"--bgAlpha": ö.hsla(a[1], 50, a[0], 0.7),
-			"--clrAlpha": ö.hsla(b[1], 50, b[0], 0.7),
-			"--bgAlphaLight": ö.hsla(a[1], 50, a[0], 0.1),
-			"--clrAlphaLight": ö.hsla(b[1], 50, b[0], 0.1),
+			"--bg": hsla(a[1], 50, a[0]),
+			"--clr": hsla(b[1], 50, b[0]),
+			"--bgAlpha": hsla(a[1], 50, a[0], 0.7),
+			"--clrAlpha": hsla(b[1], 50, b[0], 0.7),
+			"--bgAlphaLight": hsla(a[1], 50, a[0], 0.1),
+			"--clrAlphaLight": hsla(b[1], 50, b[0], 0.1),
 			"--multiply": a[2],
 			"--screen": b[2],
 		};

@@ -15,8 +15,8 @@ importers:
         specifier: ^1.0.9
         version: 1.0.9
       ouml:
-        specifier: ^0.3.4
-        version: 0.3.4
+        specifier: ^0.2.0
+        version: 0.2.0
       sirv-cli:
         specifier: ^1.0.14
         version: 1.0.14
@@ -298,8 +298,8 @@ packages:
   opts@2.0.2:
     resolution: {integrity: sha512-k41FwbcLnlgnFh69f4qdUfvDQ+5vaSDnVPFI/y5XuhKRq97EnVVneO9F1ESVCdiVu4fCS2L8usX3mU331hB7pg==}
 
-  ouml@0.3.4:
-    resolution: {integrity: sha512-8nJ2no4R+HdyvCTRpTueZ+DG9wmchlLw7lUAHmN3McRWqYEZwIsP8LJx7KYgXP0NuqTd9a4Yg2w5MIDNg8gNuA==}
+  ouml@0.2.0:
+    resolution: {integrity: sha512-vIKZ6LsHCz1D8yDVkkqx8eQxo/if7PX55xp+jDiD/LFfX7RHfbkq6PlJbeq0jl53i370Y1tKroY4EHwco8LDeA==}
 
   path-is-absolute@1.0.1:
     resolution: {integrity: sha512-AVbw3UJ2e9bq64vSaS9Am0fje1Pa8pbGqTTsmXfaIiMpnr5DlDhfJOuLj9Sf95ZPVDAUerDfEk88MPmPe7UCQg==}
@@ -690,7 +690,7 @@ snapshots:
 
   opts@2.0.2: {}
 
-  ouml@0.3.4: {}
+  ouml@0.2.0: {}
 
   path-is-absolute@1.0.1: {}
 

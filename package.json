@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "awesomplete-es6": "^1.2.2",
-    "loerem": "^1.0.9",
+    "loerem": "^1.0.10",
     "ouml": "^0.2.0",
     "sirv-cli": "^1.0.14"
   }

@@ -12,8 +12,8 @@ importers:
         specifier: ^1.2.2
         version: 1.2.2
       loerem:
-        specifier: ^1.0.9
-        version: 1.0.9
+        specifier: ^1.0.10
+        version: 1.0.10
       ouml:
         specifier: ^0.2.0
         version: 0.2.0
@@ -265,8 +265,8 @@ packages:
     resolution: {integrity: sha512-XfegD5pyTAfb+GY6chk283Ox5z8WexG56OvM06RWLpAc/UHozO8X6xAxEkIitZOtsSMM1Yr3DkHgW5W+onLhCw==}
     engines: {node: '>=6'}
 
-  loerem@1.0.9:
-    resolution: {integrity: sha512-qWQ7JN3Rk5d83giQA6IQLUJ7DQ6TskcGPSDBQ0T3d6EjIQzA87hKhuc3Dnp4E6cHigLoSz+VDUey8Bk4rb5gZw==}
+  loerem@1.0.10:
+    resolution: {integrity: sha512-Arw67acnBoW5cA23NijTHqfeFVUZVTHtHKgKNZA/PhljyzjR4ShB41SP918kvXyWHtNqDzHYDo0zjATF9sIiKQ==}
 
   magic-string@0.25.9:
     resolution: {integrity: sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==}
@@ -661,7 +661,7 @@ snapshots:
 
   local-access@1.1.0: {}
 
-  loerem@1.0.9:
+  loerem@1.0.10:
     dependencies:
       nyord: 1.0.3
       typescript: 5.7.2
